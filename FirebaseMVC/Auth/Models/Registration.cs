@@ -11,7 +11,15 @@ namespace CanYouEvenWin.Auth.Models
 
         [Required]
         public string Password { get; set; }
- 
+
+        [Required]
+        public string ImageLocation { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+
         [Required]
         [Compare(nameof(Password))] //make sure both values are the same
         [DisplayName("Confirm Password")]

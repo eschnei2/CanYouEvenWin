@@ -78,7 +78,11 @@ namespace CanYouEvenWin.Auth
             var newUserProfile = new UserProfile
             {
                 Email = fbUser.Email,
-                FirebaseUserId = fbUser.FirebaseUserId, //need to adjust for extra data
+                FirebaseUserId = fbUser.FirebaseUserId,
+                ImageLocation = registration.ImageLocation,
+                FirstName = registration.FirstName,
+                LastName = registration.LastName,
+
             };
             _userProfileRepository.Add(newUserProfile);
 
