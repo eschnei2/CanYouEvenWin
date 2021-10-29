@@ -26,6 +26,7 @@ namespace CanYouEvenWin
             services.AddTransient<IFirebaseAuthService, FirebaseAuthService>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IContestRepository, ContestRespository>();
+            services.AddTransient<IPrizeRepository, PrizeRepository>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

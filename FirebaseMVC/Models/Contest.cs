@@ -15,7 +15,7 @@ namespace CanYouEvenWin.Models
         public string ContestMaker { get; set; }
         public UserProfile UserProfile { get; set; }
         public int UserProfileId {get;set;}
-        public Prize Prize { get; set; }
+        public List<Prize> Prizes { get; set; }
 
     }
 }
