@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace CanYouEvenWin.Models.ViewModels
 {
-    public class ContestDetailViewModel
+    public class AttemptsIndexViewModel
     {
-        public List<Prize> Prizes { get; set; }
-        public Contest Contest { get; set; }
-        public List<Attempt> Attempts { get; set; }
+        public int UserProfileId { get; set; }
+        public Prize Prize { get; set; }
+        public List<Prize> Prizes {get ;set; }
+        public List <Attempt> AttemptsList { get; set; }
         public Attempt Attempt { get; set; }
         public int ContestId { get; set; }
-        public int UserProfileId { get; set; }
     }
 }
