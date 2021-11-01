@@ -103,6 +103,19 @@ namespace CanYouEvenWin.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                                        DELETE FROM Attempt
+                                        WHERE PrizeId = @id";
+
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
                                         DELETE FROM Prize
                                         WHERE Id = @id";
 
