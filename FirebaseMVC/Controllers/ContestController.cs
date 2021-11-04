@@ -14,9 +14,11 @@ namespace CanYouEvenWin.Controllers
     public class ContestController : Controller
     {
         private readonly IContestRepository _contestRepo;
-        public ContestController(IContestRepository contestRepository)
+        private readonly ICalculationRepository _calcRepo;
+        public ContestController(IContestRepository contestRepository, ICalculationRepository calculationRepository)
         {
             _contestRepo = contestRepository;
+            _calcRepo = calculationRepository;
         }
         // GET: ContestController
         public ActionResult Index()
@@ -29,13 +31,19 @@ namespace CanYouEvenWin.Controllers
         // GET: ContestController/Details/5
         public ActionResult Details(int id)
         {
+            var uId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             Contest contest = _contestRepo.GetContestById(id);
             List<Prize> prizes = _contestRepo.GetPrizeByContestId(id);
+            Calculation calculation = _calcRepo.GetAllContestCalculation(id);
+            Calculation ucalculation = _calcRepo.GetAllContestCalculationbyId(uId, id);
+
 
             ContestDetailViewModel vm = new ContestDetailViewModel
             {
                 Prizes = prizes,
-                Contest = contest             
+                Contest = contest,
+                Calculation = calculation,
+                UCalculation = ucalculation
             };
 
             return View(vm);

@@ -13,5 +13,7 @@ namespace CanYouEvenWin.Models.ViewModels
         public Attempt Attempt { get; set; }
         public int ContestId { get; set; }
         public int UserProfileId { get; set; }
+        public Calculation Calculation { get; set; }
+        public Calculation UCalculation { get; set; }
     }
 }

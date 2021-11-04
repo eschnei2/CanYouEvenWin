@@ -1,9 +1,11 @@
-﻿@model CanYouEvenWin.Models.UserProfile
+﻿@model CanYouEvenWin.Models.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <h2 class="dislay-4">Your email address is @Model.Email, but you probably knew that.</h2>
+    <h2 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal wins for a win percentage of @Model.Calculation.Percentage %</h2>
+    <h2 class="dislay-4">You Have made @Model.SCalculation.CTotal attempts with @Model.SCalculation.UCTotal wins for a win percentage of @Model.SCalculation.Percentage %</h2>
+    <h2 class="dislay-4">Your email address is @Model.UserProfile.Email, but you probably knew that.</h2>
 </div>

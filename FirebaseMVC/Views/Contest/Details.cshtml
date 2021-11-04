@@ -6,6 +6,9 @@
 
 <h1>Details</h1>
 
+
+<h2 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal wins for a win percentage of @Model.Calculation.Percentage %</h2>
+<h2 class="dislay-4">You Have made @Model.UCalculation.CTotal attempts with @Model.UCalculation.UCTotal wins for a win percentage of @Model.UCalculation.Percentage %</h2>
 <div>
     <h4>Contest</h4>
     <hr />
@@ -75,6 +78,6 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Contest.Id  }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Contest.Id }) |
     <a asp-action="Index">Back to List</a>
 </div>

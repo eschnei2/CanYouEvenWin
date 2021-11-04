@@ -28,6 +28,7 @@ namespace CanYouEvenWin
             services.AddTransient<IContestRepository, ContestRespository>();
             services.AddTransient<IPrizeRepository, PrizeRepository>();
             services.AddTransient<IAttemptRepository, AttemptRepository>();
+            services.AddTransient<ICalculationRepository, CalculationRepository>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

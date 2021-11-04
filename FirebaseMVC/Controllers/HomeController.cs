@@ -4,6 +4,7 @@ using CanYouEvenWin.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using CanYouEvenWin.Repositories;
+using CanYouEvenWin.Models.ViewModels;
 
 namespace CanYouEvenWin.Controllers
 {
@@ -11,17 +12,22 @@ namespace CanYouEvenWin.Controllers
     public class HomeController : Controller
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly ICalculationRepository _calcRepo;
 
-        public HomeController(IUserProfileRepository userProfileRepository)
+        public HomeController(IUserProfileRepository userProfileRepository, ICalculationRepository calculationRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _calcRepo = calculationRepository;
         }
 
         public IActionResult Index()
         {
+            HomeViewModel vm = new HomeViewModel();
             var userProfileId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userProfile = _userProfileRepository.GetById(userProfileId);
-            return View(userProfile);
+            vm.UserProfile = _userProfileRepository.GetById(userProfileId);
+            vm.Calculation = _calcRepo.GetAllCalculation();
+            vm.SCalculation = _calcRepo.GetAllCalculationbyId(userProfileId);
+            return View(vm);
         }
 
         public IActionResult Privacy()
