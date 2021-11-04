@@ -44,7 +44,13 @@ namespace CanYouEvenWin.Utils
         /// </summary>
         /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
         /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
-        /// <returns>The value of the given column.</returns>
+        /// <returns>The value of the given column.</returns>\
+        /// 
+        public static double GetDoubler(SqlDataReader reader, string column)
+        {
+            return reader.GetDouble(reader.GetOrdinal(column));
+        }
+
         public static DateTime GetDateTime(SqlDataReader reader, string column)
         {
             return reader.GetDateTime(reader.GetOrdinal(column));
