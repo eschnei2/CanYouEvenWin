@@ -1,0 +1,40 @@
+set identity_insert [Role] on
+insert into Role (Id, Name) values (1, "Admin");
+insert into Role (Id, Name) values (2, "User");
+
+set identity_insert [UserProfile] on
+insert into UserProfile (Id, RoleId, FirstName, LastName, Email, CreateDate, ImageLocation, FirebaseUserId) values (1, 1, 'Everett', 'Schneider', 'Everett@gmail.com', '2020-04-23', 'https://robohash.org/numquamutut.png?size=150x150&set=set1', 1, 'wBfPvJRpwxNkpYKZza1Dfw0wDpw1');
+set identity_insert [UserProfile] off
+
+SET IDENTITY_INSERT [CONTEST] ON
+INSERT INTO [CONTEST] ([Id], [Name], [SiteURL], [UserProfileId], [StartDate], [EndDate], [ContestMaker])
+VALUES (1, 'Master Lock - 100-Year Celebration', 'https://masterlocksweeps.com/home/us',
+ 1, GETDATE(), 12/31/2021, 'Master Lock'),
+ (2, 'Ford-2021 Built Ford Tough One Tough Ride', 'https://digitalbeerpromo.com/levelupsubmission/',
+ 1, GetDate(), 11/23/2021, 'Molson Coors');
+ SET IDENTITY_INSERT [CONTEST] OFF
+ 
+ SET IDENTITY_INSERT [Prize] ON
+INSERT INTO [Prize] ([Id], [Quantity], [Name], [ContestId])
+VALUES (5, 1, 'Nothing', 2),
+(2,1, '$5,000 Digital Shopping Spree', 1),
+(3, 4, '$2,500 Gift Card', 1),
+(6, 1, 'Nothing', 1);
+ SET IDENTITY_INSERT [Prize] OFF
+
+
+SET IDENTITY_INSERT [Attempt] ON
+INSERT INTO [Attempt] ([Id], [UserProfileId], [ContestId], [PrizeId])
+VALUES (1, 1, 1, 2),
+(2,1, '$5,000 Digital Shopping Spree', 1),
+(3, 4, '$2,500 Gift Card', 1),
+(6, 1, 'Nothing', 1);
+ SET IDENTITY_INSERT [Prize] OFF
+ 
+SET IDENTITY_INSERT [Attempt] ON
+INSERT INTO [Attempt] ([Id], [UserProfileId], [ContestId], [PrizeId])
+VALUES (1, 1, 1, 6),
+(2, 1, 1, 6),
+(3, 1, 1, 4),
+(4, 1, 2, 5);
+ SET IDENTITY_INSERT [Attempt] OFF
