@@ -7,18 +7,12 @@
 <h1>Details</h1>
 
 
-<h2 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal wins for a win percentage of @Model.Calculation.Percentage %</h2>
-<h2 class="dislay-4">You Have made @Model.UCalculation.CTotal attempts with @Model.UCalculation.UCTotal wins for a win percentage of @Model.UCalculation.Percentage %</h2>
+<h4 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal wins for a win percentage of @Model.Calculation.Percentage %</h4>
+<h4 class="dislay-4">You have made @Model.UCalculation.CTotal attempts with @Model.UCalculation.UCTotal wins for a win percentage of @Model.UCalculation.Percentage %</h4>
 <div>
     <h4>Contest</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Contest.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Contest.Id)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Contest.Name)
         </dt>
@@ -29,7 +23,7 @@
             @Html.DisplayNameFor(model => model.Contest.SiteURL)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Contest.SiteURL)
+            <a href=@Model.Contest.SiteURL>Click here to go to contest </a>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Contest.StartDate)
@@ -48,12 +42,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Contest.ContestMaker)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Contest.UserProfileId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Contest.UserProfileId)
         </dd>
     </dl>
     <h3>Prize(s)</h3>

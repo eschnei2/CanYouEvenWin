@@ -23,6 +23,7 @@ namespace CanYouEvenWin.Repositories
                     cmd.CommandText = @"
                                         SELECT Id, Name, SiteURL, UserProfileId, StartDate, EndDate, ContestMaker
                                         FROM Contest
+                                        WHERE EndDate > GETDATE()
                                         ORDER BY EndDate";
                     using var reader = cmd.ExecuteReader();
 

@@ -1,0 +1,84 @@
+USE [Master]
+GO
+
+IF db_id('FirebaseMVC') IS NULL
+	CREATE DATABASE [FirebaseMVC]
+GO
+
+USE [FirebaseMVC]
+GO
+
+DROP TABLE IF EXISTS [Prize];
+DROP TABLE IF EXISTS [Contest];
+DROP TABLE IF EXISTS [UserProfile];
+DROP TABLE IF EXISTS [Role];
+DROP TABLE IF EXISTS [Attempt];
+DROP TABLE IF EXISTS [Comment];
+
+
+CREATE TABLE [Role] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [Name] nvarchar(255) NOT NULL
+)
+
+CREATE TABLE [UserProfile] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [RoleId] int NOT NULL,
+  [FirstName] nvarchar(255) NOT NULL,
+  [LastName] nvarchar(255) NOT NULL,
+  [Email] nvarchar(255) NOT NULL,
+  [CreatedDate] datetime NOT NULL,
+  [ImageLocation] nvarchar(255),
+  [FirebaseUserId] NVARCHAR(28) NOT NULL,
+
+  CONSTRAINT [UQ_FirebaseUserId] UNIQUE([FirebaseUserId]),
+  CONSTRAINT [FK_UserProfile_Role] FOREIGN KEY ([RoleId]) REFERENCES [Role] ([Id])
+)
+
+
+CREATE TABLE [Contest] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [Name] nvarchar(255) NOT NULL,
+  [SiteURL] nvarchar(255) NOT NULL,
+  [UserProfileId] int,
+  [StartDate] datetime NOT NULL,
+  [EndDate] datetime NOT NULL,
+  [ContestMaker] nvarchar(255) NOT NULL
+  
+  CONSTRAINT [FK_Contest_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]) ON DELETE CASCADE
+)
+
+
+CREATE TABLE [Prize] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [Name] nvarchar(255) NOT NULL,
+  [Quantity] int,
+  [ContestId] int,
+  
+  CONSTRAINT [FK_Prize_Contest] FOREIGN KEY ([ContestId]) REFERENCES [Contest] ([Id]) ON DELETE CASCADE
+)
+
+
+CREATE TABLE [Attempt] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [UserProfileId] int,
+  [ContestId] int,
+  [PrizeId] int,
+  
+  CONSTRAINT [FK_Attempt_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),
+  CONSTRAINT [FK_Attempt_Contest] FOREIGN KEY ([ContestId]) REFERENCES [Contest] ([Id]),
+  CONSTRAINT [FK_Attempt_Prize] FOREIGN KEY ([PrizeId]) REFERENCES [Prize] ([Id])
+)
+
+CREATE TABLE [Comment] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [Comment] nvarchar(255) NOT NULL,
+  [UserProfileId] int NOT NULL,
+  [ContestId] int NOT NULL,
+  [CreateDate] datetime NOT NULL
+  
+  CONSTRAINT [FK_Comment_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),
+  CONSTRAINT [FK_Comment_Contest] FOREIGN KEY ([ContestId]) REFERENCES [Contest] ([Id])
+)
+
+GO
