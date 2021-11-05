@@ -165,6 +165,7 @@ namespace CanYouEvenWin.Repositories
         }
         public void AddContest(Contest contest)
         {
+            var cId = 0;
             using (var conn = Connection)
             {
                 conn.Open();
@@ -183,6 +184,39 @@ namespace CanYouEvenWin.Repositories
                     DbUtils.AddParameter(cmd, "@ContestMaker", contest.ContestMaker);
 
                     contest.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        SELECT Top 1 Id as cId from Contest ORDER BY cId DESC;
+                                        ";
+
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        cId = DbUtils.GetInt(reader, "cId");
+                    }
+                }
+            }
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        INSERT INTO Prize (Name, Quantity, ContestId)
+                                        OUTPUT INSERTED.ID
+                                        VALUES ('Nothing', 1, @contestId)";
+
+                    Prize prize = new Prize();
+
+                    DbUtils.AddParameter(cmd, "@contestId", cId);
+
+                    prize.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

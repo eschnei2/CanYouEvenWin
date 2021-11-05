@@ -3,8 +3,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h2 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal wins for a win percentage of @Model.Calculation.Percentage %</h2>
-    <h2 class="dislay-4">You have made @Model.SCalculation.CTotal attempts with @Model.SCalculation.UCTotal wins for a win percentage of @Model.SCalculation.Percentage %</h2>
+<div class="container pt-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome @Model.UserProfile.FirstName @Model.UserProfile.LastName </h1>
+        <h3 class="dislay-4">There have been @Model.Calculation.CTotal attempts with @Model.Calculation.UCTotal win(s) for a win percentage of @Model.Calculation.Percentage %</h3>
+        <h3 class="dislay-4">You have made @Model.SCalculation.CTotal attempts with @Model.SCalculation.UCTotal win(s) for a win percentage of @Model.SCalculation.Percentage %</h3>
+        <h5>Are you winning more than others?</h5>
+    </div>
 </div>
