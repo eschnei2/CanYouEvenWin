@@ -196,12 +196,14 @@ namespace CanYouEvenWin.Repositories
                     }
                 }
             }
-            using (var conn = Connection)
+            if (total != 0)
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (var conn = Connection)
                 {
-                    cmd.CommandText = @"
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
                                         SELECT
                                         cast((select count(a.Id) From Attempt a 
                                         INNER JOIN Prize p on p.Id = a.PrizeId
@@ -209,11 +211,12 @@ namespace CanYouEvenWin.Repositories
                                         cast((select count(a.Id) FROM Attempt a WHERE a.ContestId = @cId) AS float) AS winRate;
                                         ";
 
-                    DbUtils.AddParameter(cmd, "@cId", cId);
-                    using var reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        winRate = DbUtils.GetDoubler(reader, "winRate");
+                        DbUtils.AddParameter(cmd, "@cId", cId);
+                        using var reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            winRate = DbUtils.GetDoubler(reader, "winRate");
+                        }
                     }
                 }
             }
